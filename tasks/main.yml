@@ -1,7 +1,60 @@
 ---
-# tasks file for ansible-role-example
+# tasks file for ansible-role-nsd
 
 - assert:
     that:
-        - ansible_os_family == 'OpenBSD'
-        - ansible_distribution_release == '5.9'
+        - ansible_os_family in [ 'Debian', 'OpenBSD' ]
+
+- name: APT install NSD
+  when: ansible_pkg_mgr == 'apt'
+  apt:
+      name: nsd
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+
+- name: Create conf.d directory
+  file:
+      path: '{{ nsd_conf_d }}'
+      state: directory
+      owner: root
+      group: 0
+      mode: 0o755
+
+- name: Use the conf.d directory
+  lineinfile:
+      dest: '{{ nsd_conf }}'
+      line: 'include: "{{ nsd_conf_d }}/*.conf"'
+      state: present
+  notify:
+      - Restart NSD
+
+- name: Copy configuration templates
+  with_fileglob:
+      - templates/nsd_conf_d/*
+  template:
+      src: '{{ item }}'
+      dest: '{{ nsd_conf_d }}/'
+      owner: root
+      group: 0
+      mode: 0o644
+  notify:
+      - Restart NSD
+
+- name: Copy zones
+  with_fileglob:
+      - templates/nsd_zones/*
+  template:
+      src: '{{ item }}'
+      dest: '{{ nsd_zones }}/'
+      owner: root
+      group: 0
+      mode: 0o644
+  notify:
+      - Restart NSD
+
+- name: Enable NSD
+  service:
+      name: nsd
+      enabled: yes
+      state: started

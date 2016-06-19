@@ -1,20 +1,24 @@
-Example
-#######
+NSD
+###
 
-An (empty) example Ansible role complete with working tests out of the box. For
-more information read the `blog post
-<https://www.shore.co.il/blog/ansible-example-role/>`_.
+Install NSD with minimal configuration. Just package installation, create
+configuration and zones directories and copy templates (if any). Configuration
+templates can be placed inside :code:`templates/nsd_conf_d` and zone templates
+inside :code:`templates/nsd_zones` either inside the role or relative to the
+playbook.
 
 Requirements
 ------------
 
 - `Ansible 2.0 or later <https://www.ansible.com/>`_.
-- `OpenBSD 5.9 or later <http://www.openbsd.org/>`_.
+- `OpenBSD <http://www.openbsd.org/>`_ or `Debian <http://www.debian.org/>`_
+  (OpenBSD 5.9 and Debian Jessie are tested, other versions or derivatives
+  should also work).
 
 Role Variables
 --------------
 
-None.
+See :code:`defaults/main.yml`.
 
 Dependencies
 ------------

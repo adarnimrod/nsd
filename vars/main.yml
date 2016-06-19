@@ -1,2 +1,6 @@
 ---
-# vars file for ansible-role-example
+# vars file for ansible-role-nsd
+
+nsd_conf: '{{ "/var/nsd/etc/nsd.conf" if ansible_os_family == "OpenBSD" else "/etc/nsd/nsd.conf" }}'
+nsd_conf_d: '{{ nsd_conf }}.d'
+nsd_zones: '{{ "/var/nsd/zones" if ansible_os_family == "OpenBSD" else "/etc/nsd" }}'

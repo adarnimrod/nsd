@@ -1,0 +1,12 @@
+$TTL 1h
+$ORIGIN testzone.
+@ IN SOA localhost. hostmaster (
+    1970010101
+    1h
+    1m
+    1h
+    1h )
+            NS  localhost.
+a           IN  A   127.0.0.2
+localhost   IN  A   127.0.0.1
+
