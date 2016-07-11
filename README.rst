@@ -10,10 +10,7 @@ playbook.
 Requirements
 ------------
 
-- `Ansible 2.0 or later <https://www.ansible.com/>`_.
-- `OpenBSD <http://www.openbsd.org/>`_ or `Debian <http://www.debian.org/>`_
-  (OpenBSD 5.9 and Debian Jessie are tested, other versions or derivatives
-  should also work).
+See :code:`meta/main.yml` and assertions at top of :code:`tasks/main.yml`.
 
 Role Variables
 --------------
