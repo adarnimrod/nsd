@@ -53,8 +53,23 @@
   notify:
       - Restart NSD
 
+- name: Alias emails to root
+  lineinfile:
+      dest: '{{ aliases_file[ansible_os_family] }}'
+      create: yes
+      line: '{{ nsd_user[ansible_os_family] }}: root'
+      regexp: '{{ nsd_user[ansible_os_family] }}:'
+  notify:
+      - Update SMTPd database
+
 - name: Enable NSD
   service:
       name: nsd
       enabled: yes
       state: started
+
+- meta: flush_handlers
+
+- name: Wait for NSD to recieve requests
+  wait_for:
+      port: 53

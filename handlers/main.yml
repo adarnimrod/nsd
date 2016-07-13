@@ -5,3 +5,7 @@
   service:
       name: nsd
       state: restarted
+
+- name: Update SMTPd database
+  when: ansible_os_family == 'OpenBSD'
+  command: /usr/bin/newaliases
