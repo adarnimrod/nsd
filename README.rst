@@ -3,8 +3,8 @@ NSD
 
 Install NSD with minimal configuration. Just package installation, create
 configuration and zones directories and copy templates (if any). Configuration
-templates can be placed inside :code:`templates/nsd_conf_d` and zone templates
-inside :code:`templates/nsd_zones` either inside the role or relative to the
+templates can be placed inside :code:`templates/nsd/conf.d` and zone templates
+inside :code:`templates/nsd/zones` either inside the role or relative to the
 playbook.
 
 Requirements
