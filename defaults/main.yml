@@ -1,2 +1,7 @@
 ---
 # defaults file for ansible-role-nsd
+
+nsd_ratelimit_qps: 200 # Limit rate of requests/second.
+nsd_whitelist_ratelimit_qps: 2000 # Limit rate of requests/seconds from
+                                  # whitelisted addresses.
+nsd_whitelist: []
