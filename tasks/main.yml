@@ -32,6 +32,7 @@
 - name: Copy configuration templates
   with_fileglob:
       - templates/nsd/conf.d/*
+      - '{{ playbook_dir }}/templates/nsd/conf.d/*'
   template:
       src: '{{ item }}'
       dest: '{{ nsd_conf_d }}/'
@@ -44,6 +45,7 @@
 - name: Copy zones
   with_fileglob:
       - templates/nsd/zones/*
+      - '{{ playbook_dir }}/templates/nsd/zones/*'
   template:
       src: '{{ item }}'
       dest: '{{ nsd_zones }}/'
