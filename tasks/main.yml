@@ -29,6 +29,16 @@
   notify:
       - Restart NSD
 
+- name: Configure
+  with_dict: '{{ nsd_config }}'
+  lineinfile:
+      dest: '{{ nsd_conf }}'
+      line: '{{ item.key }}: {{ item.value }}'
+      regexp: '{{ item.key }}:'
+      insertafter: 'server:'
+  notify:
+      - Restart NSD
+
 - name: Copy configuration templates
   with_fileglob:
       - templates/nsd/conf.d/*
@@ -56,10 +66,11 @@
       - Restart NSD
 
 - name: Alias emails to root
+  when: nsd_mail_alias is defined
   lineinfile:
       dest: '{{ aliases_file[ansible_os_family] }}'
       create: yes
-      line: '{{ nsd_user[ansible_os_family] }}: root'
+      line: '{{ nsd_user[ansible_os_family] }}: {{ nsd_mail_alias }}'
       regexp: '{{ nsd_user[ansible_os_family] }}:'
   notify:
       - Update SMTPd database

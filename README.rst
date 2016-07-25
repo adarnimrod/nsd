@@ -1,11 +1,15 @@
 NSD
 ###
 
-Install NSD with minimal configuration. Just package installation, create
-configuration and zones directories and copy templates (if any). Configuration
-templates can be placed inside :code:`templates/nsd/conf.d` and zone templates
-inside :code:`templates/nsd/zones` either inside the role or relative to the
-playbook.
+Provision NSD authorative DNS server. By default the role has minimal
+configuration. You can add your own by overriding the default
+:code:`nsd_config` dictionary with your own for configuration under the
+:code:`server` block in :code:`nsd.conf`. For other blocks that can declared
+multiple times (like the :code:`zone` block) add your own templates in the
+:code:`templates/nsd/conf.d` directory either inside the role or next to your
+playbook. Likewise, zone templates can be added by placing them in
+:code:`templates/nsd/zones` (again either inside the role or relative to your
+playbook).
 
 Requirements
 ------------
