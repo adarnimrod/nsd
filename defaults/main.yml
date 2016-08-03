@@ -4,5 +4,5 @@
 nsd_mail_alias: root # Where to send mail for the NSD user.
 nsd_config: # key/value configuration under the server block, for more
             # information consult the nsd.conf man page.
-    nsd_ratelimit_qps: 200
-    nsd_whitelist_ratelimit_qps: 2000
+    'rrl-ratelimit': 200
+    'rrl-whitelist-ratelimit': 2000

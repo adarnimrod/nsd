@@ -25,9 +25,17 @@
   lineinfile:
       dest: '{{ nsd_conf }}'
       line: 'include: "{{ nsd_conf_d }}/*.conf"'
+      insertafter: EOF
       state: present
   notify:
       - Restart NSD
+
+- name: Add server block
+  lineinfile:
+      dest: '{{ nsd_conf }}'
+      line: 'server:'
+      insertbefore: BOF
+      state: present
 
 - name: Configure
   with_dict: '{{ nsd_config }}'
