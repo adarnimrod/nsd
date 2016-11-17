@@ -50,7 +50,7 @@
 
 - name: Copy configuration templates
   with_fileglob:
-      - templates/nsd/conf.d/*
+      - '{{ role_path }}/templates/nsd/conf.d/*'
       - '{{ playbook_dir }}/templates/nsd/conf.d/*'
   template:
       src: '{{ item }}'
@@ -63,7 +63,7 @@
 
 - name: Copy zones
   with_fileglob:
-      - templates/nsd/zones/*
+      - '{{ role_path }}/templates/nsd/zones/*'
       - '{{ playbook_dir }}/templates/nsd/zones/*'
   template:
       src: '{{ item }}'
