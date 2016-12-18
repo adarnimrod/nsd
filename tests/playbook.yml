@@ -1,10 +1,16 @@
 ---
-- hosts: ansible-role-nsd-openbsd
+- hosts: nsd-openbsd
   gather_facts: false
-  roles: [openbsd_bootstrap]
+  roles: [openbsd-bootstrap]
+
+- hosts: nsd-xenial
+  gather_facts: false
+  roles: [debian-bootstrap]
 
 - hosts: all
-  roles: [ ansible-role-nsd ]
+  strategy: free
+  roles:
+    - role: nsd
   post_tasks:
       - name: Copy test zone
         with_items:

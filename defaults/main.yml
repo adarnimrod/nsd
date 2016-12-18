@@ -1,5 +1,5 @@
 ---
-# defaults file for ansible-role-nsd
+# defaults file for nsd
 
 nsd_mail_alias: root # Where to send mail for the NSD user.
 nsd_config: # key/value configuration under the server block, for more

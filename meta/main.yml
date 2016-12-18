@@ -1,6 +1,6 @@
 galaxy_info:
   author: Nimrod Adar
-  description: Install and configure NSD
+  description: Provision an NSD authorative DNS server
   company: Shore technologies
   license: MIT
   min_ansible_version: 2.0
@@ -12,5 +12,8 @@ galaxy_info:
   - name: Debian
     versions:
     - jessie
+  - name: Ubuntu
+    versions:
+    - xenial
   galaxy_tags: [ networking, web ]
 dependencies: []
