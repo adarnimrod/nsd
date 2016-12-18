@@ -29,11 +29,9 @@ def test_nsd_config(Command, File, SystemInfo):
 def test_nsd_directories(File, SystemInfo, Sudo):
     if SystemInfo.type == 'openbsd':
         with Sudo():
-            assert File('/var/nsd/etc/nsd.conf.d').is_directory
             assert File('/var/nsd/zones').is_directory
     elif SystemInfo.type == 'linux' and SystemInfo.distribution in ['debian',
                                                                     'ubuntu']:
-        assert File('/etc/nsd/nsd.conf.d').is_directory
         assert File('/etc/nsd').is_directory
 
 
