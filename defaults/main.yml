@@ -7,7 +7,7 @@ nsd_server_block: |
     rrl-whitelist-ratelimit: 2000
 
 nsd_remote_control_block: |
-    control-enable: yes
+    control-enable: {{ "yes" if ansible_os_family == 'OpenBSD' else "no" }}
 
 nsd_patterns: []
 nsd_keys: []
