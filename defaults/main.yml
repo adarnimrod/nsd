@@ -2,7 +2,13 @@
 # defaults file for nsd
 
 nsd_mail_alias: root # Where to send mail for the NSD user.
-nsd_config: # key/value configuration under the server block, for more
-            # information consult the nsd.conf man page.
-    'rrl-ratelimit': 200
-    'rrl-whitelist-ratelimit': 2000
+nsd_server_block: |
+    rrl-ratelimit: 200
+    rrl-whitelist-ratelimit: 2000
+
+nsd_remote_control_block: |
+    control-enable: no
+
+nsd_patterns: []
+nsd_keys: []
+nsd_zones: []

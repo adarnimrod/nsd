@@ -1,0 +1,23 @@
+server:
+{{ nsd_server_block }}
+
+remote-control:
+{{ nsd_remote_control_block }}
+
+{% for pattern in nsd_patterns %}
+pattern:
+{{ pattern }}
+
+{% endfor %}
+
+{% for key in nsd_keys %}
+key:
+{{ key }}
+
+{% endfor %}
+
+{% for zone in nsd_zones %}
+zone:
+{{ zone }}
+
+{% endfor %}

@@ -5,14 +5,13 @@ NSD
     :target: https://travis-ci.org/adarnimrod/nsd
 
 Provision an NSD authorative DNS server. By default the role has minimal
-configuration. You can add your own by overriding the default
-:code:`nsd_config` dictionary with your own for configuration under the
-:code:`server` block in :code:`nsd.conf`. For other blocks that can declared
-multiple times (like the :code:`zone` block) add your own templates in the
-:code:`templates/nsd/conf.d` directory either inside the role or next to your
-playbook. Likewise, zone templates can be added by placing them in
-:code:`templates/nsd/zones` (again either inside the role or relative to your
-playbook).
+configuration. Overriding :code:`nsd_server_block` with a text block will
+configure the :code:`server` clause of NSD, same for
+:code:`nsd_remote_control_block` and the :code:`remote-control` block. Multiple
+patterns, zones and keys are provided by overriding :code:`nsd_patterns`,
+:code:`nsd_zones` and :code:`nsd_keys` respectively. Zone file templates can be
+added by placing them in :code:`templates/nsd/zones` either inside the role or
+relative to your playbook.
 
 Requirements
 ------------

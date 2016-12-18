@@ -2,8 +2,7 @@
 # vars file for nsd
 
 nsd_conf: '{{ "/var/nsd/etc/nsd.conf" if ansible_os_family == "OpenBSD" else "/etc/nsd/nsd.conf" }}'
-nsd_conf_d: '{{ nsd_conf }}.d'
-nsd_zones: '{{ "/var/nsd/zones" if ansible_os_family == "OpenBSD" else "/etc/nsd" }}'
+nsd_zones_dir: '{{ "/var/nsd/zones" if ansible_os_family == "OpenBSD" else "/etc/nsd" }}'
 
 aliases_file:
     OpenBSD: /etc/mail/aliases

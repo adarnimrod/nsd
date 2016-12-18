@@ -6,7 +6,11 @@
     that:
         - ansible_os_family in nsd_user
         - ansible_os_family in aliases_file
-        - nsd_config is iterable
+        - nsd_server_block is defined
+        - nsd_remote_control_block is defined
+        - nsd_patterns is iterable
+        - nsd_keys is iterable
+        - nsd_zones is iterable
 
 - name: APT install NSD
   when: ansible_pkg_mgr == 'apt'
@@ -16,60 +20,31 @@
       update_cache: yes
       cache_valid_time: 3600
 
-- name: Create conf.d directory
+- name: Create zones directory
   file:
-      path: '{{ nsd_conf_d }}'
+      path: '{{ nsd_zones_dir }}'
       state: directory
       owner: root
       group: 0
       mode: 0o755
 
-- name: Use the conf.d directory
-  lineinfile:
-      dest: '{{ nsd_conf }}'
-      line: 'include: "{{ nsd_conf_d }}/*.conf"'
-      insertafter: EOF
-      state: present
-  notify:
-      - Restart NSD
-
-- name: Add server block
-  lineinfile:
-      dest: '{{ nsd_conf }}'
-      line: 'server:'
-      insertbefore: BOF
-      state: present
-
 - name: Configure
-  with_dict: '{{ nsd_config }}'
-  lineinfile:
-      dest: '{{ nsd_conf }}'
-      line: '{{ item.key }}: {{ item.value }}'
-      regexp: '{{ item.key }}:'
-      insertafter: 'server:'
-  notify:
-      - Restart NSD
-
-- name: Copy configuration templates
-  with_fileglob:
-      - '{{ role_path }}/templates/nsd/conf.d/*'
-      - '{{ playbook_dir }}/templates/nsd/conf.d/*'
   template:
-      src: '{{ item }}'
-      dest: '{{ nsd_conf_d }}/'
+      src: nsd.conf.j2
+      dest: '{{ nsd_conf }}'
       owner: root
       group: 0
-      mode: 0o644
+      mode: 0o0644
   notify:
       - Restart NSD
 
-- name: Copy zones
+- name: Copy zone templates
   with_fileglob:
       - '{{ role_path }}/templates/nsd/zones/*'
       - '{{ playbook_dir }}/templates/nsd/zones/*'
   template:
       src: '{{ item }}'
-      dest: '{{ nsd_zones }}/'
+      dest: '{{ nsd_zones_dir }}/'
       owner: root
       group: 0
       mode: 0o644

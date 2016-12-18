@@ -11,18 +11,12 @@
   strategy: free
   roles:
     - role: nsd
+      nsd_zones:
+          - |
+              name: "testzone"
+              zonefile: "testzone"
   post_tasks:
-      - name: Copy test zone
-        with_items:
-            - src: templates/nsd_conf_d/testzone.conf
-              dest: '{{ nsd_conf_d }}/testzone.conf'
-            - src: templates/nsd_zones/testzone
-              dest: '{{ nsd_zones }}/testzone'
-        template:
-            src: '{{ item.src }}'
-            dest: '{{ item.dest }}'
-            owner: root
-            group: 0
-            mode: 0o0644
-        notify:
-            - Restart NSD
+      - name: APT install test utilities
+        apt:
+            name: [net-tools, dnsutils]
+            state: present
