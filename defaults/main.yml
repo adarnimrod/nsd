@@ -7,7 +7,7 @@ nsd_server_block: |
     rrl-whitelist-ratelimit: 2000
 
 nsd_remote_control_block: |
-    control-enable: no
+    control-enable: yes
 
 nsd_patterns: []
 nsd_keys: []
