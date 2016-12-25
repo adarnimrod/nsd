@@ -35,7 +35,6 @@
       owner: root
       group: 0
       mode: 0o0644
-      validate: 'nsd-checkconf {{ nsd_conf }}'
   notify:
       - Restart NSD
 
@@ -49,7 +48,6 @@
       owner: root
       group: 0
       mode: 0o644
-      validate: 'nsd-checkconf {{ nsd_conf }}'
   notify:
       - Restart NSD
 
@@ -62,6 +60,10 @@
       regexp: '{{ nsd_user[ansible_os_family] }}:'
   notify:
       - Update SMTPd database
+
+- name: Validate config
+  command: 'nsd-checkconf {{ nsd_conf }}'
+  changed_when: False
 
 - name: Enable NSD
   service:
